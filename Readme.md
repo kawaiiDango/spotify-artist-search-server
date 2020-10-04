@@ -1,4 +1,4 @@
-Lastfm api compatible Spotify artist search server, to be self hosted, used by (Pano Scrobbler)[https://github.com/kawaiiDango/pScrobbler].
+Lastfm api compatible Spotify artist search server, to be self hosted, used by [Pano Scrobbler](https://github.com/kawaiiDango/pScrobbler).
 
 Probably one of the few node projects with no dependencies.
 
