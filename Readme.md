@@ -4,3 +4,5 @@ Probably one of the few node projects with no dependencies.
 
 Required environment variables:
 `API_KEY` (anything), `SPOTIFY_CLIENT`, `SPOTIFY_SECRET`
+
+Run with a recent version of node with --experimental-fetch
