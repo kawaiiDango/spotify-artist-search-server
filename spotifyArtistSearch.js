@@ -138,21 +138,29 @@ function xmlEscapeMap(string) {
 }
 
 const server = http.createServer(async (req, res) => {
+
+  let form = null;
   if (req.url === "/" && req.method === "POST") {
-    const form = await collectRequestData(req);
-    if (
-      form.method &&
-      form.method.toLowerCase() === "artist.getinfo.spotify" &&
-      form.artist &&
-      form.api_key === process.env.API_KEY
-    ) {
-      const { xml, statusCode } = await spotifyArtistSearch(form.artist);
-      res.statusCode = statusCode;
-      res.end(xml);
-      return;
-    }
+    form = await collectRequestData(req);
+  } else if (req.url.includes("?") && req.method === "GET") {
+    const query = req.url.split("?")[1];
+    form = querystring.parse(query);
+  }
+
+  if (
+    form &&
+    form.method &&
+    form.method.toLowerCase() === "artist.getinfo.spotify" &&
+    form.artist &&
+    form.api_key === process.env.API_KEY
+  ) {
+    const { xml, statusCode } = await spotifyArtistSearch(form.artist);
+    res.statusCode = statusCode;
+    res.end(xml);
+    return;
   }
   res.end();
+
 });
 
 server.listen(PORT, "127.0.0.1");
